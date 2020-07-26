@@ -6,7 +6,7 @@ var timerSound = new Audio('assets/06_Urban_Beat.mp3');
 timerSound.volume = 0.1;
 
 var sessionResult = document.querySelector(".session-result");
-var sessionCount = ".1";
+var sessionCount = "5";
 sessionResult.textContent = sessionCount; 
 
 var breakResult = document.querySelector(".break-result");
