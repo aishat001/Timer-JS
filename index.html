@@ -10,23 +10,23 @@
     </head>
     <body>
         <div class="container">
-            <h1>Timer</h1>
+            <h1 class="label">POMODORO</h1>
             <div class="heading">
                 <div id="break-label">
-                <h2>break-length</h2>
+                <h2 id="label">break</h2>
                 <div class="break-container">
-                    <div class=" break-increment btn box" id="break-increment"><ion-icon name="caret-up-outline"></ion-icon></div>
+                    <button class=" break-increment btn box" id="break-increment"><ion-icon name="caret-up-outline" id="increase"></ion-icon></button>
                     <h2 class="break-result box" id="break-length">5</h2>
-                    <div class="break-decrement btn box" id="break-decrement"><ion-icon name="caret-down-outline"></ion-icon></div>
+                    <button class="break-decrement btn box" id="break-decrement"><ion-icon name="caret-down-outline" id="decrease"></ion-icon></button>
                 </div>
                 </div>
             
                 <div id="session-label">
-                <h2>session-length</h2>
+                <h2 id="label">session</h2>
                 <div class="break-container">
-                    <div class="session-increment btn box" id="session-increment"><ion-icon name="caret-up-outline"></ion-icon></div>
+                    <button class="session-increment btn box" id="session-increment"><ion-icon name="caret-up-outline" id="increase"></ion-icon></button>
                     <h2 class="session-result box" id="session-length">25</h2>
-                    <div class="session-decrement btn box" id="session-decrement"><ion-icon name="caret-down-outline"></ion-icon></div>
+                    <button class="session-decrement btn box" id="session-decrement"><ion-icon name="caret-down-outline" id="decrease"></ion-icon></button>
                 </div>
                 </div>
             </div>
@@ -36,9 +36,9 @@
               <h1 id="time-left">25</h1>
             </div>
             <div id="start_stop">
-                <div class="start btn box" id="start"><ion-icon name="play-sharp"></ion-icon></div>
-                <div class="stop btn box" id="stop"><ion-icon name="pause-sharp"></ion-icon></div>
-                <div class="reset btn box" id="reset"><ion-icon name="refresh-circle"></ion-icon></div>
+                <button class="start btn box" id="start"><ion-icon name="play-sharp" id="play"></ion-icon></button>
+                <button class="stop btn box" id="stop"><ion-icon name="pause-sharp" id="pause"></ion-icon></button>
+                <button class="reset btn box" id="reset"><ion-icon name="refresh-circle" id="resets"></ion-icon></button>
               </div>
          </div>
         <script src="JS/index.js" async defer></script>

@@ -3,10 +3,10 @@ var btns = document.querySelectorAll(".btn");
 var timeLeftContent = document.getElementById("time-left");
 
 var timerSound = new Audio('assets/06_Urban_Beat.mp3');
-timerSound.volume = 0.3;
+timerSound.volume = 0.1;
 
 var sessionResult = document.querySelector(".session-result");
-var sessionCount = "25";
+var sessionCount = ".1";
 sessionResult.textContent = sessionCount; 
 
 var breakResult = document.querySelector(".break-result");
@@ -44,23 +44,31 @@ function getLeft() {
         document.getElementById("timer-label").innerHTML = "Break Time";
             breakCount--;
             timeLeftContent.textContent = breakCount;   
-            playSound();
-    } else if (breakCount === 0) {
-        document.getElementById("timer-label").innerHTML = "Session";
-        timeLeftContent.textContent = getTimeLeft(timeLimit);
-    }
+    } 
 
   }
 
   function playSound() {
-      if (breakCount === 0) {
           timerSound.play();
           alert("SESSION OVER");
-          timerSound.pause();
-          timerSound.currentTime = 0;
-      }
+        //   timerSound.pause();
+        //   timerSound.currentTime = 0;
+    
     }
-    playSound();
+    
+
+function disableButton() {
+    document.getElementById('break-increment').disabled = true;
+    document.getElementById('break-decrement').disabled = true;
+    document.getElementById('session-increment').disabled = true;
+    document.getElementById('session-decrement').disabled = true;
+}
+function enableButton() {
+    document.getElementById('break-increment').disabled = false;
+    document.getElementById('break-decrement').disabled = false;
+    document.getElementById('session-increment').disabled = false;
+    document.getElementById('session-decrement').disabled = false;
+}
 
 btns.forEach(btn => {
 // --------SESSION LENGTH---------
@@ -105,17 +113,27 @@ btns.forEach(btn => {
 
  // --------START TIMER BTN CLICK---------
     function startTimer() {
-        if (btn.className.includes("start")) {
+        clearInterval(timeInterval);
+            document.getElementById("play").style.color = "#ff1200b0";
+            document.getElementById("pause").style.color = "white";
+            disableButton();
             timeInterval = setInterval(() => {
-            getLeft();
+                getLeft();
+            if (breakCount <= 0) {
+                    document.getElementById("timer-label").innerHTML = "Session";
+                    timeLeftContent.textContent = getTimeLeft(timeLimit);
+                    playSound();
+                }
             }, 1000);
             getLeft();
         }
-    }
 
 // ---------STOP TIMER BTN CLICK-------
     function stopTimer() {
         if (btn.className.includes("stop")) {
+            document.getElementById("pause").style.color = "#ff1200b0";
+            document.getElementById("play").style.color = "white";
+            disableButton()
             getTimeLeftContent();
             window.clearInterval(timeInterval);
        }
@@ -124,20 +142,29 @@ btns.forEach(btn => {
  // ---------RESET TIMER BTN CLICK-------
     function resetTimer() {
         if (btn.className.includes("reset")) {
+            document.getElementById("pause").style.color = "white";
+            document.getElementById("play").style.color = "white";
+             sessionCount = "5";
+             breakCount = "5";
+
+             timeLimit = sessionCount * 60;
+            timePassed = 0;
+            timeLeft = timeLimit;
+            timeLeftContent.textContent = getTimeLeft(timeLeft);
+            enableButton();
             window.clearInterval(timeInterval);
-            location.reload();
-            // sessionCount = 25
-            // sessionResult.textContent = sessionCount; 
+            // location.reload();
+
         }
     }
 
-if (startTimer === true) {
-    var increa = btn.className.includes("break-increment");
-    increa.setAttribute("disabled", true);
-}
     btn.addEventListener("click", sessionLength);
     btn.addEventListener("click", breakLength);
-    btn.addEventListener("click", startTimer);
+    btn.addEventListener("click", function () {
+        if (btn.className.includes("start")) {
+            startTimer();
+        }
+      });
     btn.addEventListener("click", stopTimer);
     btn.addEventListener("click", resetTimer);
 });
